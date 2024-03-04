@@ -20,31 +20,26 @@
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                     <thead>
                     <tr>
+                        <th>SL</th>
                         <th>Name</th>
-                        <th>Position</th>
-                        <th>Office</th>
-                        <th>Age</th>
-                        <th>Start date</th>
-                        <th>Salary</th>
+                        <th>Description</th>
+                        <th>Created date</th>
+                        <th>Action</th>
                     </tr>
                     </thead>
                     <tbody>
-                    <tr>
-                        <td>Tiger Nixon</td>
-                        <td>System Architect</td>
-                        <td>Edinburgh</td>
-                        <td>61</td>
-                        <td>2011/04/25</td>
-                        <td>$320,800</td>
-                    </tr>
-                    <tr>
-                        <td>Garrett Winters</td>
-                        <td>Accountant</td>
-                        <td>Tokyo</td>
-                        <td>63</td>
-                        <td>2011/07/25</td>
-                        <td>$170,750</td>
-                    </tr>
+                        @foreach($categoris as $sl => $category)
+                            <tr>
+                                <td>{{ ++$sl }}</td>
+                                <td>{{ $category->name }}</td>
+                                <td>{{ $category->description }}</td>
+                                <td>{{ $category->created_at }}</td>
+                                <td>
+                                    <button class="btn btn-primary"><i class="fas fa-edit"></i></button>
+                                    <button class="btn btn-danger"><i class="fa fa-trash"></i></button>
+                                </td>
+                            </tr>
+                        @endforeach
                     </tbody>
                 </table>
             </div>
@@ -76,7 +71,7 @@
                     </div>
                     <div class="modal-footer">
                         <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                        <a class="btn btn-primary" type="submit">Add Category</a>
+                        <button class="btn btn-primary" type="submit">Add Category</button>
                     </div>
                 </form>
             </div>
