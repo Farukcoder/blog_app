@@ -9,7 +9,7 @@
 @endphp
 
 @section('main_content')
-    <!-- DataTales Example -->
+    <!-- Categories DataTales Start-->
     <div class="card shadow mb-4">
         <div class="card-header py-3 d-flex align-items-center justify-content-between">
             <h6 class="m-0 font-weight-bold text-primary">Categories</h6>
@@ -45,8 +45,9 @@
             </div>
         </div>
     </div>
+    <!-- Categories DataTales End -->
 
-    <!-- category Modal-->
+    <!-- category Modal Start-->
     <div class="modal fade" id="categoryModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
          aria-hidden="true">
         <div class="modal-dialog" role="document">
@@ -77,5 +78,5 @@
             </div>
         </div>
     </div>
-
+    <!-- category Modal End-->
 @endsection
