@@ -43,8 +43,9 @@ class CategoryController extends Controller
 
         Category::create($data);
 
+        $notify = ['message' => 'Category created successfully', 'alert-type' => 'success'];
 
-        return redirect()->back();
+        return redirect()->back()->with($notify);
 
     }
 
@@ -83,7 +84,9 @@ class CategoryController extends Controller
 
         $category->update($data);
 
-        return redirect()->back();
+        $notify = ['message' => 'Category Update successfully', 'alert-type' => 'success'];
+
+        return redirect()->back()->with($notify);
     }
 
     /**
