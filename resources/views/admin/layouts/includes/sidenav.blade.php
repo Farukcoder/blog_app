@@ -30,7 +30,15 @@
     <li class="nav-item @if($page == 'Category') active @endif">
         <a class="nav-link" href="{{ route('category.index') }}">
             <i class="fas fa-fw fa-table"></i>
-            <span>Category</span></a>
+            <span>Category</span>
+        </a>
+    </li>
+
+    <li class="nav-item @if($page == 'Post') active @endif">
+        <a class="nav-link" href="{{ route('post.index') }}">
+            <i class="fas fa-fw fa-table"></i>
+            <span>Post</span>
+        </a>
     </li>
 
     <!-- Heading -->
