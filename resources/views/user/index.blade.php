@@ -15,7 +15,7 @@
                                 <img src="{{ asset('post_thumbnails/'. $post->thumbnail)}}" class="card-img-top" alt="post-thumb">
                             </div>
                             <div class="card-body">
-                                <h3 class="mb-3"><a class="post-title" href="post-details.html">{{ $post->title }}</a></h3>
+                                <h3 class="mb-3"><a class="post-title" href="{{ route('single_post_view', $post->id) }}">{{ $post->title }}</a></h3>
                                 <ul class="card-meta list-inline">
                                     <li class="list-inline-item">
                                         <i class="ti-calendar"></i>{{ date('d M Y', strtotime($post->created_at)) }}
