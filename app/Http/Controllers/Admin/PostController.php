@@ -16,7 +16,13 @@ class PostController extends Controller
     public function index()
     {
         $categoris = Category::all();
-        $posts = Post::all();
+
+        $objPost = new Post();
+
+        $posts = $objPost->join('categories AS CA', 'CA.id', '=', 'posts.category_id')
+            ->select('posts.*', 'CA.name as category_name')
+            ->get();
+
         return view('admin.post', compact('categoris', 'posts'));
     }
 

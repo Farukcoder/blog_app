@@ -22,6 +22,7 @@
                     <tr>
                         <th>SL</th>
                         <th>Title</th>
+                        <th>Category</th>
                         <th>Description</th>
                         <th>Thumbnail</th>
                         <th>Status</th>
@@ -34,6 +35,7 @@
                         <tr>
                             <td>{{ ++$sl }}</td>
                             <td>{{ $post->title }}</td>
+                            <td>{{ $post->category_name }}</td>
                             <td>{{ $post->description }}</td>
                             <td>
                                 <img src="{{ asset('post_thumbnails/' . $post->thumbnail) }}" alt=""

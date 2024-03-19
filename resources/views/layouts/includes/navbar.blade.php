@@ -8,7 +8,7 @@
             <div class="collapse navbar-collapse text-center order-lg-2 order-3" id="navigation">
                 <ul class="navbar-nav mx-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="contact.html">Home </a>
+                        <a class="nav-link" href="{{ url('/') }}">Home </a>
                     </li>
 
                     <li class="nav-item">
