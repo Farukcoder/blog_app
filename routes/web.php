@@ -22,6 +22,10 @@ Route::get('/', [UserController::class, 'index']);
 Route::get('post/{id}', [UserController::class, 'single_post_view'])->name('single_post_view');
 Route::get('post/category/{category_id}', [UserController::class, 'filter_by_category'])->name('filter_by_category');
 
+Route::group(['middleware' => 'auth'], function (){
+   Route::post('/posts/{id}/comment/store', [UserController::class, 'comment_store'])->name('comment_store');
+});
+
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
