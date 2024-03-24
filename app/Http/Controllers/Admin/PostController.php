@@ -7,6 +7,8 @@ use App\Models\Category;
 use App\Models\Post;
 use Illuminate\Support\Facades\File;
 use Illuminate\Http\Request;
+use Intervention\Image\ImageManager;
+use Intervention\Image\Drivers\Gd\Driver;
 
 class PostController extends Controller
 {
@@ -56,7 +58,12 @@ class PostController extends Controller
             $file = $request->file('thumbnail');
             $extension = $file->getClientOriginalExtension();
             $filename = time(). '.' . $extension;
-            $file->move(public_path('post_thumbnails'), $filename);
+
+            ///image resize
+            $manager = new ImageManager(new Driver());
+            $thumbnail = $manager->read($file);
+            $thumbnail->resize(600, 360)->save(public_path('post_thumbnails/'. $filename));
+
             $data['thumbnail'] = $filename;
         }
 
@@ -110,7 +117,12 @@ class PostController extends Controller
             $file = $request->file('thumbnail');
             $extension = $file->getClientOriginalExtension();
             $filename = time(). '.' . $extension;
-            $file->move(public_path('post_thumbnails'), $filename);
+
+            //image resize
+            $manager = new ImageManager(new Driver());
+            $thumbnail = $manager->read($file);
+            $thumbnail->resize(600, 360)->save(public_path('post_thumbnails/'. $filename));
+
             $data['thumbnail'] = $filename;
         }
 

@@ -12,6 +12,8 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
 use Illuminate\View\View;
+use Intervention\Image\ImageManager;
+use Intervention\Image\Drivers\Gd\Driver;
 
 class RegisteredUserController extends Controller
 {
@@ -41,6 +43,18 @@ class RegisteredUserController extends Controller
             'email' => $request->email,
             'password' => Hash::make($request->password),
         ]);
+
+        if($request->hasFile('photo')) {
+            $file = $request->file('photo');
+            $filename = time(). '.' . $file->getClientOriginalExtension();
+
+            //resize image
+            $manager = new ImageManager(new Driver());
+            $imagefile = $manager->read($file);
+            $imagefile->resize(300, 300)->save(public_path('assets/images/userphotos/'. $filename));
+
+            $user->update(['photo' => $filename]);
+        }
 
         event(new Registered($user));
 

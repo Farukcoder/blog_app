@@ -36,7 +36,7 @@
                             <td>{{ ++$sl }}</td>
                             <td>{{ $post->title }}</td>
                             <td>{{ $post->category_name }}</td>
-                            <td>{{ $post->description }}</td>
+                            <td>{!! $post->description !!}</td>
                             <td>
                                 <img src="{{ asset('post_thumbnails/' . $post->thumbnail) }}" alt=""
                                      style="width: 100px">
@@ -64,9 +64,9 @@
                         </tr>
 
                         <!-- post edit Modal Start-->
-                        <div class="modal fade" id="{{'post'. $post->id .'EditModal'}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+                        <div class="modal" id="{{'post'. $post->id .'EditModal'}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
                              aria-hidden="true">
-                            <div class="modal-dialog" role="document">
+                            <div class="modal-dialog modal-lg" role="document">
                                 <div class="modal-content">
                                     <div class="modal-header">
                                         <h5 class="modal-title" id="exampleModalLabel">Edit Post</h5>
@@ -99,7 +99,7 @@
 
                                             <div class="form-group">
                                                 <label for="description">Post Description</label>
-                                                <textarea type="text" name="description" id="description" class="form-control" rows="5" > {{ $post->description }}</textarea>
+                                                <textarea type="text" name="description" id="description" class="form-control summernote" rows="5" >{!! $post->description !!}}</textarea>
                                                 @error('description')
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $message }}</strong>
@@ -138,9 +138,9 @@
     <!-- Posts DataTales End -->
 
     <!-- Post add Modal Start-->
-    <div class="modal fade" id="postModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    <div class="modal" id="postModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
          aria-hidden="true">
-        <div class="modal-dialog" role="document">
+        <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel">Add Post</h5>
@@ -173,7 +173,7 @@
 
                         <div class="form-group">
                             <label for="description">Post Description</label>
-                            <textarea type="text" name="description" id="description" class="form-control" rows="5" > {{ old('description') }}</textarea>
+                            <textarea type="text" name="description" id="description" class="form-control summernote" rows="5" > {{ old('description') }}</textarea>
                             @error('description')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>

@@ -2,7 +2,7 @@
 
 @section('mainSection')
     @include('layouts.banner')
-    @include('layouts.trending')
+{{--    @include('layouts.trending')--}}
     <section class="section-sm">
         <div class="container">
             <div class="row justify-content-center">
@@ -24,7 +24,7 @@
                                         Category: <b class="text-primary">{{ $post->category_name }}</b>
                                     </li>
                                 </ul>
-                                <p>{{ $post->description }}</p>
+                                <p>{!! $post->description !!}</p>
                                 <a href="{{ route('single_post_view', $post->id) }}" class="btn btn-outline-primary">Read More</a>
                             </div>
                         </article>
