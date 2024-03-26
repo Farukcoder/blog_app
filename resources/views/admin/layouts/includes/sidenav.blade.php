@@ -40,6 +40,12 @@
             <span>Post</span>
         </a>
     </li>
+    <li class="nav-item @if($page == 'message') active @endif">
+        <a class="nav-link" href="{{ route('message.index') }}">
+            <i class="fas fa-fw fa-table"></i>
+            <span>Contact Message</span>
+        </a>
+    </li>
 
     <!-- Heading -->
     <div class="sidebar-heading">

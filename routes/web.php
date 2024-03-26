@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\HomeController;
+use App\Http\Controllers\admin\MessageController;
 use App\Http\Controllers\Admin\PostController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
@@ -40,6 +41,10 @@ Route::group(['middleware' => 'auth'], function (){
 
    Route::get('/question/answers/{id}/like', [UserController::class, 'questionAnswerLike'])->name('question_answer_like');
    Route::get('/question/answers/{id}/unlike', [UserController::class, 'questionAnswerUnlike'])->name('question_answer_unlike');
+
+   Route::get('/contact', [UserController::class, 'contact'])->name('contact');
+
+   Route::post('/contact/store', [UserController::class, 'contactStore'])->name('contact_store');
 });
 
 Route::get('/dashboard', function () {
@@ -73,6 +78,8 @@ Route::group(['middleware' => 'admin'], function() {
     Route::resource('/admin/category', CategoryController::class);
 
     Route::resource('/admin/post', PostController::class);
+
+    Route::resource('/admin/contact/message', MessageController::class);
 
 });
 

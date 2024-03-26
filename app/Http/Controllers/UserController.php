@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
+use App\Models\ContactMessage;
 use App\Models\Post;
 use App\Models\PostComment;
 use App\Models\Question;
@@ -185,6 +186,26 @@ class UserController extends Controller
         QuestionAnswerLike::where('answer_id', $id)->where('user_id', auth()->user()->id)->delete();
 
         return redirect()->back();
+    }
+
+    public function contact()
+    {
+        return view('user.contact');
+    }
+
+    public function contactStore(Request $request)
+    {
+        $data = [
+            'user_id' => auth()->user()->id,
+            'subject' => $request->subject,
+            'message' => $request->message
+        ];
+
+        ContactMessage::create($data);
+
+        $notify = ['message' => 'Message sent successfully', 'alert-type' => 'success'];
+
+        return redirect()->back()->with($notify);
     }
 
     /**
