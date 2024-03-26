@@ -1500,3 +1500,13 @@ mark {
   box-shadow: none !important;
 }
 /*# sourceMappingURL=style.css.map */
+
+/* Questions styles */
+.avater {
+    height: 40px;
+    width: 40px;
+    border-radius: 50%;
+}
+#askQuestion {
+    padding-top: 100px;
+}

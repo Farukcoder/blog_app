@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Category;
 use App\Models\Post;
 use App\Models\PostComment;
+use App\Models\Question;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
@@ -72,6 +73,51 @@ class UserController extends Controller
         $notify = ['message' => 'Comment successfully', 'alert-type' => 'success'];
 
         return redirect()->back()->with($notify);
+    }
+
+    public function questions()
+    {
+        $qustionObj = new Question();
+
+        $questions = $qustionObj->join('categories', 'categories.id', '=', 'questions.category_id')
+            ->join('users', 'users.id', '=', 'questions.user_id')
+            ->select('questions.*', 'categories.name as category_name', 'users.name as user_name', 'users.photo as user_photo')
+            ->orderby('questions.id', 'desc')
+            ->paginate(5);
+
+        $categoris = Category::all();
+
+        return view('user.questions', compact('categoris', 'questions'));
+    }
+
+    public function question_store(Request $request)
+    {
+        $request->validate([
+           'category_id' => 'required',
+            'question' => 'required'
+        ]);
+
+        $data = [
+          'user_id' => auth()->user()->id,
+          'category_id' => $request->category_id,
+          'question' => $request->question
+        ];
+
+        Question::create($data);
+
+        $notify = ['message' => 'Question successfully added', 'alert-type' => 'success'];
+
+        return redirect()->back()->with($notify);
+    }
+
+    public function question_delete($id)
+    {
+        Question::find($id)->delete();
+
+        $notify = ['message' => 'Question deleted done', 'alert-type' => 'success'];
+
+        return redirect()->back()->with($notify);
+
     }
 
     /**

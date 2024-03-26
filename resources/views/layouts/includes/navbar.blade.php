@@ -20,7 +20,7 @@
                     </li>
 
                     <li class="nav-item">
-                        <a class="nav-link" href="shop.html">Question & Answer</a>
+                        <a class="nav-link" href="{{ route('questions') }}">Question & Answer</a>
                     </li>
                 </ul>
             </div>
