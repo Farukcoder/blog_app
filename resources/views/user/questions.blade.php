@@ -46,11 +46,21 @@
                                     <i class="ti-bookmark"></i>{{ $question->category_name }}
                                 </li>
                                 <li class="list-inline-item text-primary">
-                                    <i class="ti-comment"></i>5 answers
+                                    <i class="ti-comment"></i>
+                                    @php
+                                        $answers = DB::table('question_answers')->where('question_answers.question_id', $question->id)->count();
+                                        echo $answers;
+                                    @endphp
+                                    @if($answers > 1)
+                                        answers
+                                    @else
+                                        answer
+                                    @endif
+
                                 </li>
                             </ul>
 
-                            <a href="./question_answers.html" class="btn btn-outline-primary btn-sm mt-4 py-1">See answers</a>
+                            <a href="{{ route('question_answers', $question->id) }}" class="btn btn-outline-primary btn-sm mt-4 py-1">See answers</a>
                         </div>
                     </div>
                     @endforeach
