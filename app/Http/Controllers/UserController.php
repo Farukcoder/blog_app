@@ -22,7 +22,7 @@ class UserController extends Controller
             ->select('posts.*', 'CA.name as category_name')
             ->where('posts.status', 1)
             ->orderBy('posts.id', 'DESC')
-            ->get();
+            ->paginate(3);
 
         $categoris = Category::all();
 
