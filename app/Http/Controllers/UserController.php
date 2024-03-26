@@ -26,9 +26,16 @@ class UserController extends Controller
             ->orderBy('posts.id', 'DESC')
             ->paginate(3);
 
+        $recentPosts = $objPost->join('categories AS CA', 'CA.id', '=', 'posts.category_id')
+            ->select('posts.*', 'CA.name as category_name')
+            ->where('posts.status', 1)
+            ->orderBy('posts.id', 'DESC')
+            ->limit(5)
+            ->get();
+
         $categoris = Category::all();
 
-        return view('user.index', compact('posts', 'categoris'));
+        return view('user.index', compact('posts', 'categoris', 'recentPosts'));
     }
 
     public function single_post_view($id)
@@ -54,13 +61,23 @@ class UserController extends Controller
     {
         $objPost = new Post();
 
-        $posts = $objPost->join('categories AS CA', 'CA.id', '=', 'posts.category_id')
+        $filter_posts = $objPost->join('categories AS CA', 'CA.id', '=', 'posts.category_id')
             ->select('posts.*', 'CA.name as category_name')
             ->where('posts.status', 1)
             ->where('posts.category_id', $id)
             ->orderBy('posts.id', 'DESC')
+            ->paginate(5);
+
+        $recentPosts = $objPost->join('categories AS CA', 'CA.id', '=', 'posts.category_id')
+            ->select('posts.*', 'CA.name as category_name')
+            ->where('posts.status', 1)
+            ->orderBy('posts.id', 'DESC')
+            ->limit(5)
             ->get();
-        return view('user.filter_by_category', compact('posts'));
+
+        $categoris = Category::all();
+
+        return view('user.filter_by_category', compact('filter_posts', 'recentPosts', 'categoris'));
     }
 
     public function comment_store(Request $request, $id)
@@ -81,6 +98,7 @@ class UserController extends Controller
     public function questions()
     {
         $qustionObj = new Question();
+        $objPost = new Post();
 
         $questions = $qustionObj->join('categories', 'categories.id', '=', 'questions.category_id')
             ->join('users', 'users.id', '=', 'questions.user_id')
@@ -88,9 +106,16 @@ class UserController extends Controller
             ->orderby('questions.id', 'desc')
             ->paginate(5);
 
+        $posts = $objPost->join('categories AS CA', 'CA.id', '=', 'posts.category_id')
+            ->select('posts.*', 'CA.name as category_name')
+            ->where('posts.status', 1)
+            ->orderBy('posts.id', 'DESC')
+            ->paginate(3);
+
+
         $categoris = Category::all();
 
-        return view('user.questions', compact('categoris', 'questions'));
+        return view('user.questions', compact('categoris', 'questions', 'posts'));
     }
 
     public function question_store(Request $request)
@@ -208,51 +233,9 @@ class UserController extends Controller
         return redirect()->back()->with($notify);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
+    public function about()
     {
-        //
+        return view('user.about');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
-    }
 }

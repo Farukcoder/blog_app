@@ -1,5 +1,7 @@
 @extends('layouts.app')
-
+@section('title')
+    Single Post
+@endsection
 @section('mainSection')
     <div class="py-4"></div>
     <section class="section">
