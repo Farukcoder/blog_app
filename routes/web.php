@@ -18,6 +18,7 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+
 Route::get('/', [UserController::class, 'index']);
 Route::get('post/{id}', [UserController::class, 'single_post_view'])->name('single_post_view');
 Route::get('post/category/{category_id}', [UserController::class, 'filter_by_category'])->name('filter_by_category');
@@ -36,6 +37,9 @@ Route::group(['middleware' => 'auth'], function (){
    Route::post('/question/answer/store/{id}', [UserController::class, 'questionAnswerStore'])->name('question_answer_store');
 
    Route::delete('/question/answer/{id}/delete', [UserController::class, 'questionAnswerDelete'])->name('question_answer_delete');
+
+   Route::get('/question/answers/{id}/like', [UserController::class, 'questionAnswerLike'])->name('question_answer_like');
+   Route::get('/question/answers/{id}/unlike', [UserController::class, 'questionAnswerUnlike'])->name('question_answer_unlike');
 });
 
 Route::get('/dashboard', function () {

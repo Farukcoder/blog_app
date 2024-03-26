@@ -7,6 +7,7 @@ use App\Models\Post;
 use App\Models\PostComment;
 use App\Models\Question;
 use App\Models\QuestionAnswer;
+use App\Models\QuestionAnswerLike;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
@@ -165,6 +166,25 @@ class UserController extends Controller
         $notify = ['message' => 'Answer deleted done', 'alert-type' => 'success'];
 
         return redirect()->back()->with($notify);
+    }
+
+    public function questionAnswerLike($id)
+    {
+        $data = [
+            'answer_id' => $id,
+            'user_id' => auth()->user()->id
+        ];
+
+        QuestionAnswerLike::create($data);
+
+        return redirect()->back();
+    }
+
+    public function questionAnswerUnlike($id)
+    {
+        QuestionAnswerLike::where('answer_id', $id)->where('user_id', auth()->user()->id)->delete();
+
+        return redirect()->back();
     }
 
     /**
